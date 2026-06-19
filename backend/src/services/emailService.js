@@ -1,16 +1,26 @@
-const nodemailer = require("nodemailer");
+const nodemailer =
+require("nodemailer");
 
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
+const transporter =
+nodemailer.createTransport({
+
+  host:
+    "smtp-relay.brevo.com",
+
   port: 587,
+
   secure: false,
+
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+
+    user:
+      process.env.EMAIL_USER,
+
+    pass:
+      process.env.EMAIL_PASS,
+
   },
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000,
+
 });
 
 const sendEmail = async (
@@ -22,13 +32,21 @@ const sendEmail = async (
   try {
 
     await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+
+      from:
+        process.env.EMAIL_USER,
+
       to,
+
       subject,
+
       text,
+
     });
 
-    console.log(`Email sent to ${to}`);
+    console.log(
+      `Email sent to ${to}`
+    );
 
   } catch (error) {
 
@@ -37,8 +55,11 @@ const sendEmail = async (
       error.message
     );
 
+    throw error;
+
   }
 
 };
 
-module.exports = sendEmail;
+module.exports =
+sendEmail;
