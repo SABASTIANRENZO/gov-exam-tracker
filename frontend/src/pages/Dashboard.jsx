@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Navbar from "../components/Navbar";
+import API from "../services/api";
 
 function Dashboard() {
 
@@ -13,18 +13,28 @@ function Dashboard() {
 
   useEffect(() => {
 
-    const fetchDashboard = async () => {
+  const fetchDashboard = async () => {
 
-      const res = await axios.get(
-        "http://localhost:5000/api/dashboard"
-      );
+    try {
+
+      const res =
+        await API.get(
+          "/dashboard"
+        );
 
       setStats(res.data);
-    };
 
-    fetchDashboard();
+    } catch (error) {
 
-  }, []);
+      console.error(error);
+
+    }
+
+  };
+
+  fetchDashboard();
+
+}, []);
 
   return (
     <><Navbar />
