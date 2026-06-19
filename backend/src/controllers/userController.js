@@ -144,7 +144,7 @@ const updatePreferences = async (
             req.body.preferences,
         },
         {
-          new: true,
+          returnDocument: "after",
         }
       );
 
@@ -186,15 +186,28 @@ const updatePreferences = async (
         }
       );
 
-      await sendEmail(
-        user.email,
-        "Your Selected Exam Notifications",
-        emailContent
-      );
+      try {
 
-      console.log(
-        `Preference email sent to ${user.email}`
-      );
+        await sendEmail(
+          user.email,
+          "Your Selected Exam Notifications",
+          emailContent
+        );
+
+        console.log(
+          `Preference email sent to ${user.email}`
+        );
+
+      } catch (emailError) {
+
+        console.error(
+          "Email Error:",
+          emailError.message
+        );
+
+        // Continue even if email fails
+
+      }
 
     }
 
