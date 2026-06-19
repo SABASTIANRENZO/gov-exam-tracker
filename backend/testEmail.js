@@ -4,7 +4,7 @@ const sendEmail =
 require("./src/services/emailService");
 
 sendEmail(
-  "marcian@gmail.com",
-  "Test Notification",
-  "Government Exam Tracker Working"
+  "22cs064@gmail.com",
+  "Test Email",
+  "Testing Gmail SMTP"
 );
