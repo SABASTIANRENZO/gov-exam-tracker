@@ -188,8 +188,14 @@ const updatePreferences = async (
 
       try {
 
-        console.log(
-  "Email would be sent here"
+        await sendEmail(
+  user.email,
+  "Your Selected Exam Notifications",
+  emailContent
+);
+
+console.log(
+  `Preference email sent to ${user.email}`
 );
 
         console.log(
