@@ -1,6 +1,11 @@
 const nodemailer =
 require("nodemailer");
 
+console.log(
+  "EMAIL_USER:",
+  process.env.EMAIL_USER
+);
+
 const transporter =
 nodemailer.createTransport({
 
@@ -21,6 +26,10 @@ nodemailer.createTransport({
 
   },
 
+  connectionTimeout: 30000,
+  greetingTimeout: 30000,
+  socketTimeout: 30000,
+
 });
 
 const sendEmail = async (
@@ -31,21 +40,27 @@ const sendEmail = async (
 
   try {
 
-    await transporter.sendMail({
+    const info =
+      await transporter.sendMail({
 
-      from:
-        "govexamtracker@gmail.com",
+        from:
+          "govexamtracker@gmail.com",
 
-      to,
+        to,
 
-      subject,
+        subject,
 
-      text,
+        text,
 
-    });
+      });
 
     console.log(
       `Email sent to ${to}`
+    );
+
+    console.log(
+      "Message ID:",
+      info.messageId
     );
 
   } catch (error) {
@@ -55,7 +70,14 @@ const sendEmail = async (
       error.message
     );
 
-    throw error;
+    if (error.response) {
+
+      console.error(
+        "SMTP Response:",
+        error.response
+      );
+
+    }
 
   }
 
