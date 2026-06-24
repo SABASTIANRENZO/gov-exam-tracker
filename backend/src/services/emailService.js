@@ -34,7 +34,7 @@ const sendEmail = async (
     await transporter.sendMail({
 
       from:
-        process.env.EMAIL_USER,
+        "govexamtracker@gmail.com",
 
       to,
 
