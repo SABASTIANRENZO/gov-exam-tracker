@@ -186,32 +186,17 @@ const updatePreferences = async (
         }
       );
 
-      try {
-
+      const emailStatus =
         await sendEmail(
-  user.email,
-  "Your Selected Exam Notifications",
-  emailContent
-);
-
-console.log(
-  `Preference email sent to ${user.email}`
-);
-
-        console.log(
-          `Preference email sent to ${user.email}`
+          user.email,
+          "Your Selected Exam Notifications",
+          emailContent
         );
 
-      } catch (emailError) {
-
-        console.error(
-          "Email Error:",
-          emailError.message
-        );
-
-        // Continue even if email fails
-
-      }
+      console.log(
+        "Email Status:",
+        emailStatus
+      );
 
     }
 
@@ -232,7 +217,6 @@ console.log(
   }
 
 };
-
 module.exports = {
   register,
   login,

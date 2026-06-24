@@ -40,6 +40,11 @@ const sendEmail = async (
 
   try {
 
+    console.log(
+      "Attempting to send email to:",
+      to
+    );
+
     const info =
       await transporter.sendMail({
 
@@ -63,6 +68,8 @@ const sendEmail = async (
       info.messageId
     );
 
+    return true;
+
   } catch (error) {
 
     console.error(
@@ -78,6 +85,8 @@ const sendEmail = async (
       );
 
     }
+
+    return false;
 
   }
 
